@@ -1,8 +1,10 @@
 # Converter_Project
  capstone
 
+ Github 협업 가이드 
+ ----------------------
  git clone https://github.com/lvnvn177/Converter_Project.git -> 현재 경로에 캡스톤 저장소 클론 생성 
- ----------------------------------
+
 
  git add . -> 현재 작성한 모든 수정사항 commit 전 올리기   
  
