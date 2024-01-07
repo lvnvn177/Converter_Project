@@ -15,3 +15,9 @@
  git push origin main -> add한 수정사항 적용하기
 
  위의 순서대로 명령어를 입력하면 수정이 적용 됨
+
+참고 사이트에서 나와있듯이
+ git branch brchA
+ git branch brchB
+ git branch brchC
+이런 식으로 각자 작업 공간을 나눠서 작업을 한 뒤 main_branch에 merge 예정 
