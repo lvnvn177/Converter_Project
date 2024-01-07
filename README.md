@@ -25,3 +25,7 @@
  git branch brchC
 
 이런 식으로 각자 작업 공간을 나눠서 작업을 한 뒤 main_branch에 merge 예정 
+
+생성한 branch는 git checkout 브랜치이름 으로 전환한 뒤 작업을 진행하면 됨
+
+작업을 끝마치고 원격 저장소에 반영을 할 때 -> git push origin 브랜치일므
