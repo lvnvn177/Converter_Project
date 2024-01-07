@@ -24,10 +24,6 @@
  
  git branch brchC
 
-<<<<<<< HEAD
-이런 식으로 각자 작업 공간을 나눠서 작업을 한 뒤 main_branch에 merge 예정
-=======
-이런 식으로 각자 작업 공간을 나눠서 작업을 한 뒤 main_branch에 merge 예정 
->>>>>>> backend
+이런 식으로 각자 작업 공간을 나눠서 작업을 한 뒤 main_branch에 merge 예정 hello
 
 참고 : https://github.com/TheCopiens/algorithm-study/blob/master/docs/github/howToCreate_branch.md
