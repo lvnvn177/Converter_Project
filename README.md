@@ -32,12 +32,17 @@
 ## node package 명령어
 
 server, client 패키지 설치
+
     npm install
 
+
 react build(run client 전 실행해야 client 변경사항 적용)
+
     npm run build
 
+
 node 런타임 실행(동시, client만, server만)
+
     npm run start
     npm run client
     npm run server
