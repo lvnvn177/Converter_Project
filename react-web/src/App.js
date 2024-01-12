@@ -1,12 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'; 
+import "./App.css"; 
 
 function App() {
-  
   return (
-    <div>
-      <h1>리액트 테스트하기</h1>
+    <div className="App">
+      <div className="black-nav">
+        <h2 className="item">Converter_Project</h2>
+      </div>
     </div>
+
   );
 }
 
