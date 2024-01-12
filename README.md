@@ -27,3 +27,17 @@
 이런 식으로 각자 작업 공간을 나눠서 작업을 한 뒤 main_branch에 merge 예정 hello
 
 참고 : https://github.com/TheCopiens/algorithm-study/blob/master/docs/github/howToCreate_branch.md
+
+
+## node package 명령어
+
+server, client 패키지 설치
+    npm install
+
+react build(run client 전 실행해야 client 변경사항 적용)
+    npm run build
+
+node 런타임 실행(동시, client만, server만)
+    npm run start
+    npm run client
+    npm run server
