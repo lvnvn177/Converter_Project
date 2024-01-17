@@ -1,75 +1,90 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Dropzone from 'react-dropzone-uploader';
-import { createWorker } from "tesseract.js";
+import { createWorker } from 'tesseract.js';
+import Navigation from './components/nav';
 
 function App() {
-  const [text, setText] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewText, setPreviewText] = useState(null);
 
-  useEffect(() => {
-    // Create a Tesseract worker pool
-    const worker = createWorker();
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
 
-    async function ExtractTextFromImage(imageUrl) {
-      try {
-        await worker.load();
-        await worker.loadLanguage("eng");
-        await worker.initialize("eng");
+    // Check if the selected file is a PDF or an image
+    if (file && (file.type === 'application/pdf' || file.type.startsWith('image/'))) {
+      setSelectedFile(file);
+    } else {
+      alert('Only PDF and image files are allowed');
+    }
+  };
 
-        const { data: { text } } = await worker.recognize(imageUrl);
-        setText(text);
-      } catch (error) {
-        console.error('텍스트 추출 중 오류 발생:', error);
-      } finally {
-        await worker.terminate();
-      }
+  const handleUploadClick = () => {
+    const fileInput = document.getElementById('fileInput');
+    fileInput.click();
+  };
+
+  const handlePreviewClick = async () => {
+    if (!selectedFile) {
+      alert('Please upload a file first');
+      return;
     }
 
-    // Cleanup Tesseract worker when component unmounts
-    return () => worker.terminate();
-  }, []); // Only run this effect once during component mount
+    const worker = createWorker();
 
-  const getUploadParams = () => ({
-    url: 'https://httpbin.org/post',
-  });
+    try {
+      await worker.load();
+      await worker.loadLanguage('eng');
+      await worker.initialize('eng');
 
-  const handleChangeStatus = ({ meta }, status) => {
-    if (status === 'headers_received') {
-      alert("Uploaded");
-      setText("Recognizing...");
-      ExtractTextFromImage(meta.previewUrl, setText);
-    } else if (status === 'aborted') {
-      alert("Something went wrong");
+      const { data: { text } } = await worker.recognize(selectedFile);
+      setPreviewText(text);
+    } catch (error) {
+      console.error('Text extraction error:', error);
+    } finally {
+      await worker.terminate();
     }
   };
 
   return (
     <>
-      <nav className="navbar navbar-light bg-light justify-content-center mt-3">
-        <a className="navbar-brand" href="/">
-          React OCR
-        </a>
-        <br />
-        <p>Optical Character Recognition with React and Tesseract.js</p>
-      </nav>
+      <div className="App">
+        <Navigation />
+      </div>
 
-      <Dropzone
-        getUploadParams={getUploadParams}
-        onChangeStatus={handleChangeStatus}
-        maxFiles={1}
-        multiple={false}
-        canCancel={false}
-        accept="image/jpeg, image/png, image/jpg"
-        inputContent={(files, extra) => (extra.reject ? 'Only PNG and JPG Image files are allowed' : 'Drop  image here')}
-        styles={{
-          dropzoneActive: {
-            borderColor: 'green',
-          },
-          dropzoneReject: { borderColor: 'red', backgroundColor: '#DAA' },
-          inputLabel: (files, extra) => (extra.reject ? { color: 'red' } : {}),
-        }}
-      />
-      <div className="container text-center pt-5">{text}</div>
+      <div className="container text-center mt-5">
+        {/* 1단계: 파일 업로드 버튼 */}
+        <input
+          id="fileInput"
+          type="file"
+          accept=".pdf, .jpg, .jpeg"
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+        />
+        <div>
+          <p>Step 1: Upload File</p>
+          <button className="btn btn-primary" onClick={handleUploadClick}>
+            Upload File
+          </button>
+        </div>
+
+        {/* 2단계: 미리보기 버튼 */}
+        {selectedFile && (
+          <div className="mt-3">
+            <p>Step 2: Preview</p>
+            <button className="btn btn-success" onClick={handlePreviewClick}>
+              Preview
+            </button>
+          </div>
+        )}
+
+        {/* 텍스트 미리보기 */}
+        {previewText && (
+          <div className="mt-5">
+            <p>Preview:</p>
+            <p>{previewText}</p>
+          </div>
+        )}
+      </div>
     </>
   );
 }
