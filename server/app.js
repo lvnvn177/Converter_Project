@@ -1,29 +1,36 @@
-const express = require('express'),
-    morgan = require('morgan'),
-    path = require('path'),
-    router = require('./routes');
-
+// app.js
+const express = require('express');
+const morgan = require('morgan');
+const path = require('path');
+const router = require('./routes');
+const { upload, uploadFileToS3 } = require('./aws-s3_FileUpload');
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+const cors = require('cors');
 // Middleware
-// Bodyparsing
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// Serve our static build files
 app.use(express.static(path.join(__dirname, '../client/build')));
-// Provides great rout logging in our console for debugging
 app.use(morgan('dev'));
 
-// Import the routing setup from our Router 
+// Import the routing setup 
 app.use('/', router);
 
-//Serving react on routes unused by previous routing
+// routing
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-//Startup
+// upload
+app.post('/upload', upload.single('file'), (req, res) => {
+
+    uploadFileToS3(req.file);
+
+    res.json({ message: 'File uploaded successfully!' });
+});
+
+// Startup
 app.listen(PORT, () => {
-    console.log(`The API Server is listening on port: ${PORT}`)
-})
+    console.log(`The API Server is listening on port: ${PORT}`);
+});
