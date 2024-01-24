@@ -13,11 +13,13 @@ dotenv.config({ path: path.join('/home/lvnvn/Convert_test', '.env') });
 
 
 const s3Client = new S3Client({
-    region: process.env.AWS_REGION,
+    endpoint: 'https://s3-ap-northeast-2.amazonaws.com',
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: process.env.ACCESS_KEY_ID,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY,
     },
+    region: 'ap-northeast-2',
+    signatureVersion: 'v4',
 });
 
 const upload = multer({
