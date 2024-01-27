@@ -11,7 +11,7 @@ app = Flask(__name__)
 model = keras.models.load_model('path/to/your/model.h5')
 
 def convert_pdf_to_images(pdf_path):
-    pdf_document = fitz.open(pdf_path)
+    pdf_document = fitz.open(pdf_path)  
     images = []
     for page_number in range(pdf_document.page_count):
         page = pdf_document.load_page(page_number)
