@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.file-preview {
+  display: flex;
+  align-items: flex-start; /* 텍스트 미리보기를 이미지의 상단에 정렬 */
+}
+
+.progress-time {
+  margin-left: 20px;
+}
+
+.text-preview {
+  margin-left: 20px; /* 이미지와 텍스트 사이의 간격 조정 */
+}
