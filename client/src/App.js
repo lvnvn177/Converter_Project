@@ -17,7 +17,6 @@ function App() {
       formData.append('file', selectedFile);
 
       await axios.post('/upload', formData);
-
       console.log('File uploaded successfully!');
     }catch(error){
       console.error('File uploaded failed:', error);

@@ -27,7 +27,6 @@ app.get('*', (req, res) => {
 app.post('/upload', upload.single('file'), (req, res) => {
 
     uploadFileToS3(req.file);
-
     res.json({ message: 'File uploaded successfully!' });
 });
 /*
@@ -49,6 +48,6 @@ const startFlaskServer = () => {
 */
 // Startup
 app.listen(PORT, () => {
-    startFlaskServer();
+  //  startFlaskServer();
     console.log(`The API Server is listening on port: ${PORT}`);
 });

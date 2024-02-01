@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 // awsS3FileUpload.js
 const { Readable } = require("stream");
 const { Upload } = require("@aws-sdk/lib-storage");
+const pdf2png = require('pdf2png'); 
 
 dotenv.config({ path: path.join('/home/lvnvn/Convert_test', '.env') });
 
@@ -27,28 +28,30 @@ const upload = multer({
         s3: s3Client,
         bucket: process.env.S3_BUCKET_NAME,
         key: function (req, file, cb) {
-            cb(null, Date.now().toString() + '-' + file.originalname);
+            cb(null, 'original/' + Date.now().toString() + '-' + file.originalname);
         },
     }),
 });
 
-
-
 const uploadFileToS3 = async (file) => {
+    const readableStream = new Readable();
+    readableStream.push(file.buffer);
+    readableStream.push(null);  // Signal the end of the stream
+
     const upload = new Upload({
         client: s3Client,
         params: {
             Bucket: process.env.S3_BUCKET_NAME,
-            Key: Date.now().toString() + '-' + file.originalname,
-            Body: Readable.from(file.buffer),
+            Key: 'original/' + Date.now().toString() + '-' + file.originalname,
+            Body: readableStream,
         },
     });
 
     try {
         await upload.done();
-        console.log('File uploaded successfully!');
+        console.log('Original_File uploaded successfully!');
     } catch (error) {
-        console.error('File upload failed:', error);
+        console.error('Original_File upload failed:', error);
     }
 };
 
