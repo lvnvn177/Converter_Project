@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const path = require('path');
 const router = require('./routes');
 const { upload, uploadFileToS3 } = require('./aws-s3_FileUpload');
-const { spawn } = require ('child_process');
+//const { spawn } = require ('child_process');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const cors = require('cors');
@@ -30,7 +30,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
     res.json({ message: 'File uploaded successfully!' });
 });
-
+/*
 const startFlaskServer = () => {
     const flaskProcess = spawn('python', ['./learn_server.py']);
 
@@ -46,7 +46,7 @@ const startFlaskServer = () => {
         console.log('Flask 서버가 코드 ${code}로 종료되었습니다.');
     });
 };
-
+*/
 // Startup
 app.listen(PORT, () => {
     startFlaskServer();
