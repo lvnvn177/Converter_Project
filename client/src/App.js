@@ -22,7 +22,7 @@ function App() {
       console.error('File uploaded failed:', error);
     }
   };
-
+  
   return (
     <div className="App">
       <header className="App-header">
