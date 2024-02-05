@@ -12,7 +12,8 @@
   "dependencies": {
     "express": "^4.18.2",
     "morgan": "^1.10.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "tesseract.js": "^5.0.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
