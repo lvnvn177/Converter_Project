@@ -34,9 +34,7 @@ function App() {
   };
 
   const handleOCRConvert = async () => {
-    if (!selectedFile) {
-      alert('Please upload a file first');
-      return;
+    
     }
   
     const worker = createWorker();
