@@ -7,8 +7,10 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewText, setPreviewText] = useState(null);
+
   const [progress, setProgress] = useState(0);
-  const [processingTime, setProcessingTime] = useState(null);
+  const [processingTime, setProcessingTime] = useState(''); // 수정된 부분
+
   const [imagePath, setImagePath] = useState("");
   const [fileType, setFileType] = useState("");
 
@@ -28,14 +30,9 @@ function App() {
     }
   };
 
-  const handleUploadClick = () => {
+  const handleUploadClick = async () => {
     const fileInput = document.getElementById('fileInput');
     fileInput.click();
-  };
-
-  const handleOCRConvert = async () => {
-    
-    }
   
     const worker = createWorker();
   
@@ -47,28 +44,25 @@ function App() {
       await worker.loadLanguage('eng+kor');
       await worker.initialize('eng+kor');
   
-      // 진행률 정보를 직접 업데이트
-      const { data } = await worker.recognize(selectedFile, {
-        onProgress: (progress) => {
-          setProgress(progress.percent);
-        },
-      });
-  
+      // OCR 실행
+      const { data } = await worker.recognize(selectedFile);
       const { text } = data;
       setPreviewText(text);
   
       const endTime = performance.now(); // 처리 종료 시간 측정
+      
       const processingTimeInSeconds = ((endTime - startTime) / 1000).toFixed(2);
       setProcessingTime(processingTimeInSeconds); // 처리 시간 설정
   
       setProgress(100);
     } catch (error) {
-      console.error('Text extraction error:', error);
+      console.error('텍스트 추출 오류:', error);
     } finally {
       await worker.terminate();
     }
   };
   
+
   return (
     <>
       <div className="App">
@@ -115,7 +109,7 @@ function App() {
 
       {/* OCR 변환 버튼 항상 표시 */}
       <div className="mt-3">
-        <button className="btn btn-success" onClick={handleOCRConvert}>
+        <button className="btn btn-success" >
           Convert
         </button>
       </div>
@@ -136,6 +130,6 @@ function App() {
 
     </>
   );
-}
+      }
 
 export default App;
