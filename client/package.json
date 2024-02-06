@@ -10,13 +10,12 @@
     "axios": "^1.6.5",
     "blueimp-load-image": "^5.16.0",
     "bootstrap": "^4.6.2",
-    "pdfjs-dist": "^4.0.379",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0",
     "react-pdf": "^7.7.0",
     "react-router-dom": "^6.21.3",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^4.0.0",
     "tesseract.js": "^2.1.5",
     "web-vitals": "^2.1.4"
   },
@@ -44,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }
