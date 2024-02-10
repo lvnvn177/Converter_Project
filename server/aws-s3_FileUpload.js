@@ -9,7 +9,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const fs = require('fs');
 
-dotenv.config({ path: path.join('/home/lvnvn/Convert_test', '.env') });
+dotenv.config({ path: path.join('/home/lvnvn/Converter_Project', '.env') });
 
 const s3Client = new S3Client({
     endpoint: 'https://s3-ap-northeast-2.amazonaws.com',
@@ -51,7 +51,7 @@ const upload = multer({
 const uploadFileToS3 = async (file) => {
     const readableStream = new Readable();
     readableStream.push(file.buffer);
-    //readableStream.push(null);
+    readableStream.push(null);
 
     try {
         const upload = new Upload({
@@ -64,11 +64,11 @@ const uploadFileToS3 = async (file) => {
         });
         //console.log('Original_File uploaded successfully!');
         const uploadResult = await upload.done();
-        const objectUrl = `https://${process.env.S3_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com/${uploadResult.Key}`;
-        
+        //const objectUrl = `https://${process.env.S3_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com/${uploadResult.Key}`;
+        const objectUrl = `https://${process.env.S3_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com/original/1707575568803-file.pdf`;
         console.log('Original_File uploaded successfully!');
         console.log('업로드된 객체 URL:', objectUrl);
-        
+       
         const pngImages = await convertPdfToPng(objectUrl);
 
         if (pngImages && pngImages.length > 0) {
