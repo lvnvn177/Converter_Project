@@ -1,11 +1,11 @@
 // Service.js
 
-import React from 'react';
+/*import React from 'react';
 
 function Service({ handleFileChange, handleUploadClick, handlePreviewClick, selectedFile, previewText }) {
   return (
     <div className="container text-center mt-5">
-      {/* 1단계: 파일 업로드 버튼 */}
+      //{/* 1단계: 파일 업로드 버튼 *}
       <input
         id="fileInput"
         type="file"
@@ -20,7 +20,7 @@ function Service({ handleFileChange, handleUploadClick, handlePreviewClick, sele
         </button>
       </div>
 
-      {/* 2단계: 미리보기 버튼 */}
+      //{/* 2단계: 미리보기 버튼 *}
       {selectedFile && (
         <div className="mt-3">
           <p>Step 2: Preview</p>
@@ -30,7 +30,7 @@ function Service({ handleFileChange, handleUploadClick, handlePreviewClick, sele
         </div>
       )}
 
-      {/* 텍스트 미리보기 */}
+      //{/* 텍스트 미리보기 *}
       {previewText && (
         <div className="mt-5">
           <p>Preview:</p>
@@ -39,6 +39,6 @@ function Service({ handleFileChange, handleUploadClick, handlePreviewClick, sele
       )}
     </div>
   );
-}
+}*/
 
 export default Service;
