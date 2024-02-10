@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import { createWorker } from 'tesseract.js';
 import Navigation from './components/nav.js';
 import Dropbox from './components/box.js';
 
