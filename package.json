@@ -1,5 +1,5 @@
 {
-  "name": "Converter_project",
+  "name": "converter-project",
   "version": "1.0.0",
   "description": "capstone project",
   "main": "index.js",
@@ -15,16 +15,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
     "concurrently": "^8.2.2",
     "if-env": "^1.0.4",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.2"
   },
   "dependencies": {
-    "axios": "^1.6.7",
+    "@babel/eslint-parser": "^7.23.10",
     "bootstrap": "^5.3.2",
+    "fs": "^0.0.1-security",
+    "fs-react": "^0.0.4",
+    "pdf-img-convert": "^1.2.1",
+    "pdf.js": "^0.1.0",
     "react-dropzone-uploader": "^2.11.0",
-    "react-pdf": "^7.7.0",
     "tesseract.js": "^5.0.4"
   }
 }

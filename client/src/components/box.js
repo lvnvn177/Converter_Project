@@ -1,7 +1,12 @@
+// 드롭박스 기능 컴포넌트 
+
+// box 스타일시트, axios 라이브러리 임포트
 import React, { useState } from 'react';
-import './box.css';
+import './box.css'; 
 import axios from 'axios';
 
+
+// 드롭박스 아이콘 
 const Logo = () => (
   <svg className="icon" x="0px" y="0px" viewBox="0 0 24 24">
     <path fill="transparent" d="M0,0h24v24H0V0z" />
@@ -11,7 +16,7 @@ const Logo = () => (
     />
   </svg>
 );
-
+// 업로드된 파일 정보 
 const FileInfo = ({ uploadedInfo }) => (
   <ul className="preview_info">
     {Object.entries(uploadedInfo).map(([key, value]) => (
@@ -22,13 +27,18 @@ const FileInfo = ({ uploadedInfo }) => (
     ))}
   </ul>
 );
-
+// 파일 업로드 기능 
 const UploadBox = () => {
-  const [isActive, setActive] = useState(false);
-  const [uploadedInfo, setUploadedInfo] = useState(null);
+  const [isActive, setActive] = useState(false); // 드롭박스 활성 상태 변수
+  const [uploadedInfo, setUploadedInfo] = useState(null); // 업로드된 파일 정보 
 
+  // 파일 정보 설정 함수
   const setFileInfo = (file) => {
-    
+    // 파일이 이미지인지 아닌지 판단
+
+    console.log(file);
+    //var reg = /(.*?)\.(jpg|jpeg|png)$/;
+
     if (file) {
     const {name, type} = file;
     const isImage = type.includes('image');
@@ -76,7 +86,7 @@ const UploadBox = () => {
   const handleDragStart = () => setActive(true);
   const handleDragEnd = () => setActive(false);
 
-  // 아래 두 함수 drop/dragover : 브라우저 새 창 뜨는 거
+  // 아래 두 함수 drop/dragover : 브라우저 새 창 뜨는 거 방지
   const handleDragOver = (event) => {
     event.preventDefault();
   };
@@ -90,6 +100,7 @@ const UploadBox = () => {
   };
 
   return (
+    // 파일 선택하거나 드래그하여 업로드 하는 기능
     <label
       className={`preview${isActive ? ' active' : ''}`}
       onDragEnter={handleDragStart}
@@ -97,6 +108,8 @@ const UploadBox = () => {
       onDragLeave={handleDragEnd}
       onDrop={handleDrop}
     >
+      {/* 파일 선택 : onChange 이벤트로 handleUpload 함수와 연결, 
+      파일 선택 시 해당 파일 정보 설정 */}
       <input type="file" className="file" onChange={handleUpload} />
       {uploadedInfo && (
         <div>
@@ -117,6 +130,8 @@ const UploadBox = () => {
     </label>
   );
 };
+
+
 
 function Dropbox() {
   return (

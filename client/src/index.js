@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-dropzone-uploader/dist/styles.css';
-import App from './App';
+import App from './App.js';
 import * as serviceWorker from './serviceWorker';
+import * as pdfjsLib from 'pdfjs-dist';
+import { createRoot } from "react-dom/client";
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+
+root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+pdfjsLib.GlobalWorkerOptions.workerSrc = `${process.env.PUBLIC_URL}/pdf.worker.js`;
+
+serviceWorker.register(); // 또는 unregister() 대신 register()를 호출하여 서비스 워커를 등록합니다.
