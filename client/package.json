@@ -8,23 +8,16 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.5",
-    "blueimp-load-image": "^5.16.0",
-    "bootstrap": "^4.6.2",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0",
-    "react-pdf": "^7.7.0",
-    "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
-    "tesseract.js": "^2.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "client": "react-scripts start"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -43,10 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "browser": {
-    "fs": false,
-    "os": false,
-    "path": false
   }
 }

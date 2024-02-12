@@ -5,6 +5,7 @@
     pointer-events: none;
   }
   
+  /*태그 기본 제공 스타일 속성 숨기기*/
   .file {
     display: none;
   }
