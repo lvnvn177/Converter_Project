@@ -25,30 +25,10 @@ app.get('*', (req, res) => {
 
 // upload
 app.post('/upload', upload.single('file'), (req, res) => {
-
     uploadFileToS3(req.file);
     res.json({ message: 'File uploaded successfully!' });
 });
 
-/*
-const startFlaskServer = () => {
-    const flaskProcess = spawn('python', ['./learn_server.py']);
-
-    flaskProcess.stdout.on('data', (data) => {
-        console.log('Flask server print: ${data');
-    });
-
-    flaskProcess.stderr.on('data', (data) => {
-        console.error('Flask 서버 오류: ${data}');
-    });
-
-    flaskProcess.on('close', (code) => {
-        console.log('Flask 서버가 코드 ${code}로 종료되었습니다.');
-    });
-};
-*/
-// Startup
 app.listen(PORT, () => {
-  //  startFlaskServer();
     console.log(`The API Server is listening on port: ${PORT}`);
 });

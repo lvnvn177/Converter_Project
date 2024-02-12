@@ -8,7 +8,7 @@ const { S3Client } = require("@aws-sdk/client-s3");
 const path = require('path');
 const dotenv = require('dotenv');
 const fs = require('fs');
-
+const { file_upload } = require('./png-to-model');
 dotenv.config({ path: path.join('/home/lvnvn/Converter_Project', '.env') });
 
 const s3Client = new S3Client({
@@ -64,7 +64,8 @@ const uploadFileToS3 = async (file) => {
         });
         //console.log('Original_File uploaded successfully!');
         const uploadResult = await upload.done();
-        //const objectUrl = `https://${process.env.S3_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com/${uploadResult.Key}`;
+       // console.log('uploadReult: ' + uploadResult.Key);
+       // const objectUrl = `https://${process.env.S3_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com/${uploadResult.Key}`;
         const objectUrl = `https://${process.env.S3_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com/original/1707575568803-file.pdf`;
         console.log('Original_File uploaded successfully!');
         console.log('업로드된 객체 URL:', objectUrl);
@@ -76,7 +77,7 @@ const uploadFileToS3 = async (file) => {
                 const pngReadableStream = new Readable();
                 pngReadableStream.push(pngImages[i]);
                 pngReadableStream.push(null);
-
+                
                 const upload_png = new Upload({
                     client: s3Client,
                     params: {
@@ -87,8 +88,15 @@ const uploadFileToS3 = async (file) => {
                 });
 
                 try {
-                    await upload_png.done();
+                    upload_res_png = await upload_png.done();
+                  const objectUrl_png = `https://${process.env.S3_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com/${upload_res_png.Key}`;
+                   // console.log('png 객체 url : ' + objectUrl_png);
+                   // const s3 = new aws.S3({ accessKeyId: process.env.ACCESS_KEY_ID, secretAccessKey: process.env.secretAccessKey });
+                    if(i==0){
+                       file_upload(upload_res_png.Key);
+                    }
                     console.log(`PNG 파일 ${i + 1}이(가) 성공적으로 업로드되었습니다!`);
+                    //console.log('upload_file_url :' + upload_res_png.Key);
                 } catch (error) {
                     console.error(`PNG 파일 ${i + 1} 업로드에 실패했습니다:`, error);
                 }
